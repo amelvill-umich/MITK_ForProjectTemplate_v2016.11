@@ -14,12 +14,6 @@ if(MITK_USE_CTK)
   set(CTK_DEPENDS ${proj})
 
   if(NOT DEFINED CTK_DIR)
-
-    set(revision_tag 9440d3c9)
-    #IF(${proj}_REVISION_TAG)
-    #  SET(revision_tag ${${proj}_REVISION_TAG})
-    #ENDIF()
-
     set(ctk_optional_cache_args )
     if(MITK_USE_Python)
       if(NOT MITK_USE_SYSTEM_PYTHON)
@@ -62,11 +56,10 @@ if(MITK_USE_CTK)
 
     ExternalProject_Add(${proj}
       LIST_SEPARATOR ${sep}
-      URL ${MITK_THIRDPARTY_DOWNLOAD_PREFIX_URL}/CTK_${revision_tag}.tar.gz
-      #GIT_REPOSITORY https://github.com/commontk/CTK.git
-      #GIT_TAG origin/master
+      GIT_REPOSITORY "https://github.com/amelvill-umich/CTK"
+      GIT_TAG  "MITK_ProjectTemplate_v2016.11"
       URL_MD5 2c04925496e6818706ccffa8a71afaae
-      PATCH_COMMAND ${PATCH_COMMAND} -N -p1 -i ${CMAKE_CURRENT_LIST_DIR}/CTK.patch
+      PATCH_COMMAND ""
       UPDATE_COMMAND ""
       INSTALL_COMMAND ""
       CMAKE_GENERATOR ${gen}
@@ -100,8 +93,6 @@ if(MITK_USE_CTK)
 
     ExternalProject_Get_Property(${proj} binary_dir)
     set(CTK_DIR ${binary_dir})
-    #set(CTK_DIR ${ep_prefix})
-    #mitkFunctionInstallExternalCMakeProject(${proj})
 
   else()
 
